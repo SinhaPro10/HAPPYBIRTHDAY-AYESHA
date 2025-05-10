@@ -3,17 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Happy Birthday AYESHA 🎂</title>
+  <title>Happy Birthday AYESHA 🎂💖</title>
+
+  <!-- SEO and Social Sharing -->
+  <meta property="og:title" content="Happy Birthday Ayesha! 🎂">
+  <meta property="og:description" content="A special birthday surprise for Ayesha with love and celebration!">
+  <meta property="og:image" content="https://i.imgur.com/7iR8K6p.png">
+  <meta property="og:url" content="[Your Page URL]">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  
-  <!-- GSAP for animations -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <!-- Confetti.js -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
 
   <style>
+    :root {
+      --primary-pink: #ff69b4;
+      --soft-pink: #ffd1dc;
+      --gold: #ffd700;
+      --deep-pink: #d81b60;
+      --shadow: rgba(255, 105, 180, 0.3);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,15 +34,23 @@
     }
 
     body {
-      font-family: 'Roboto Slab', serif;
-      background: linear-gradient(135deg, #fff0f5, #ffd1dc);
-      color: #c71585;
-      overflow-x: hidden;
-      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffdae9 100%);
+      color: #6a1b9a;
       min-height: 100vh;
+      overflow-x: hidden;
       position: relative;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
 
     #loading {
@@ -50,67 +71,41 @@
 
     .container {
       display: none;
-      padding: clamp(15px, 4vw, 30px);
-      max-width: 100%;
+      max-width: 1000px;
       margin: 0 auto;
+      padding: clamp(15px, 4vw, 30px);
+      position: relative;
+      z-index: 2;
     }
 
-    h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.5rem, 6vw, 2.5rem);
-      margin-bottom: 15px;
-      color: #d81b60;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .header {
+      text-align: center;
+      margin: 2rem 0;
     }
 
-    .typing-text {
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-      max-width: 95%;
-      margin: 20px auto;
-      white-space: pre-line;
-      line-height: 1.6;
-      color: #333;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .collage {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 10px;
-      margin: 30px 0;
-      padding: 0 5px;
-    }
-
-    .collage img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(255, 105, 180, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    @media (hover: none) {
-      .collage img:hover {
-        transform: none;
-      }
+    .title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--deep-pink);
+      text-shadow: 2px 2px 4px var(--shadow);
+      margin-bottom: 1rem;
     }
 
     .cake-container {
+      width: clamp(200px, 40vw, 250px);
+      height: clamp(250px, 50vw, 300px);
+      margin: 2rem auto;
       perspective: 800px;
-      margin: 30px auto;
     }
 
     .cake {
       position: relative;
-      width: clamp(120px, 40vw, 160px);
-      height: clamp(150px, 50vw, 200px);
+      width: 100%;
+      height: 100%;
       background: linear-gradient(#ffccd5, #ffb6c1);
       border-radius: 0 0 20px 20px;
       box-shadow: 0 8px #ff6f91;
-      margin: 0 auto;
-      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
     }
 
     .cake::before {
@@ -146,7 +141,6 @@
       border-radius: 50%;
       transform: translateX(-50%);
       animation: flicker 0.4s infinite alternate;
-      transition: opacity 0.5s ease;
     }
 
     @keyframes flicker {
@@ -154,146 +148,217 @@
       100% { transform: translateX(-50%) scale(1.15); opacity: 0.85; }
     }
 
-    button {
-      padding: clamp(10px, 3vw, 12px) clamp(25px, 6vw, 30px);
-      font-size: clamp(0.9rem, 2.5vw, 1rem);
-      background: #ff69b4;
+    .message-container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      margin: 2rem 0;
+      box-shadow: 0 8px 32px var(--shadow);
+      backdrop-filter: blur(5px);
+    }
+
+    .love-letter {
+      font-family: 'Roboto Slab', serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.8;
+      white-space: pre-line;
+      color: #333;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .memory-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 3rem 0;
+    }
+
+    .memory-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .memory-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .memory-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+
+    .memory-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .celebration-btn, .music-btn {
+      display: block;
+      background: linear-gradient(135deg, var(--primary-pink), var(--deep-pink));
       border: none;
-      border-radius: 25px;
+      padding: clamp(10px, 3vw, 12px) clamp(25px, 6vw, 30px);
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
       color: white;
+      border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 3px 8px rgba(255, 105, 180, 0.3);
-      transition: background 0.3s, transform 0.2s;
-      margin: 10px;
+      box-shadow: 0 8px 15px var(--shadow);
+      margin: 1rem auto;
+      z-index: 10;
+      position: relative;
       touch-action: manipulation;
-      min-width: 120px;
+      opacity: 1;
+      animation: fadeIn 0.5s ease forwards;
     }
 
-    button:hover {
-      background: #ff1493;
-      transform: translateY(-2px);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    button:focus {
-      outline: 2px solid #ff1493;
+    .celebration-btn:hover, .music-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px var(--shadow);
+    }
+
+    .celebration-btn:focus, .music-btn:focus {
+      outline: 2px solid var(--deep-pink);
       outline-offset: 2px;
     }
 
-    @media (hover: none) {
-      button:hover {
-        background: #ff69b4;
-        transform: none;
-      }
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    #musicBtn.playing::after {
-      content: "🔊 Pause Music";
+    .music-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
     }
 
-    #musicBtn:not(.playing)::after {
-      content: "🔇 Play Music";
+    .music-btn::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    #sparkles {
+    .music-btn:hover::after {
+      opacity: 1;
+    }
+
+    .music-btn.playing::before {
+      content: '❚❚';
+    }
+
+    .music-btn:not(.playing)::before {
+      content: '▶';
+      position: relative;
+      left: 2px;
+    }
+
+    .music-tooltip {
+      position: absolute;
+      right: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .music-btn:hover + .music-tooltip {
+      opacity: 1;
+    }
+
+    .floating-hearts, #sparkles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 10;
+      z-index: 1;
     }
 
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 5;
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0.3; }
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-10vh); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
+    @keyframes heartExplode {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2) translateY(-100px); opacity: 0; }
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 10px;
-      }
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .title { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+      .love-letter { font-size: clamp(0.8rem, 2.2vw, 1rem); }
+      .memory-gallery { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+      .memory-card img { height: 180px; }
+      .music-btn { width: 45px; height: 45px; font-size: 1rem; }
+      .music-player { bottom: 15px; right: 15px; }
+    }
 
-      h1 {
-        font-size: clamp(1.2rem, 5vw, 2rem);
-      }
-
-      .typing-text {
-        font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-        line-height: 1.5;
-      }
-
-      .collage {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        gap: 8px;
-      }
-
-      .collage img {
-        border-radius: 8px;
-      }
-
-      button {
-        padding: 10px 20px;
-        font-size: clamp(0.85rem, 2.2vw, 0.9rem);
-        min-width: 100px;
-      }
+    @media (max-width: 480px) {
+      .memory-gallery { grid-template-columns: 1fr; }
+      .memory-card img { height: 160px; }
+      .celebration-btn { padding: 10px 20px; font-size: 0.9rem; }
     }
   </style>
 </head>
 
 <body>
+  <a href="#loveLetter" class="sr-only">Skip to message</a>
   <div id="loading">Loading Your Surprise...</div>
 
+  <div class="floating-hearts"></div>
+  <canvas id="sparkles"></canvas>
+
   <div class="container">
-    <h1>🎂 Happy Birthday AYESHA! 🎂</h1>
-
-    <div class="cake-container">
-      <div class="cake">
-        <div class="candle"></div>
-        <div class="flame" id="flame"></div>
+    <header class="header">
+      <h1 class="title">🎂 Happy Birthday AYESHA! 💖</h1>
+      <div class="cake-container">
+        <div class="cake">
+          <div class="candle"></div>
+          <div class="flame" id="flame"></div>
+        </div>
       </div>
-    </div>
+      <button class="celebration-btn" onclick="startCelebration()" aria-label="Blow out the birthday candle">Blow Out Candle 🎂</button>
+    </header>
 
-    <button onclick="startCelebration()" aria-label="Blow out the birthday candle">Blow Out Candle 🎂</button>
+    <div class="message-container" role="region" aria-label="Birthday message">
+      <pre class="love-letter" id="loveLetter" role="alert">
+🌸💖 To My Boujaan, My Ayesha 💖🌸
 
-    <audio id="bg-music" loop preload="auto">
-      <source src="https://file.garden/aBmv9ZdbGjS8LzMc/Teri-Meri%20Reprise%20%20Bodyguard%20%20Music%20Re%20Enhanced%20%20With%20Stereo%20%26%20Base%20%20@FeelTheBeat.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-
-    <button id="musicBtn" onclick="toggleMusic()" aria-label="Toggle background music"></button>
-
-    <div class="typing-text" id="typedText"></div>
-
-    <div class="collage">
-      <img src="https://i.imgur.com/7iR8K6p.png" alt="Birthday cake" loading="lazy">
-      <img src="https://i.imgur.com/lMoReZR.png" alt="Memory photo 1" loading="lazy">
-      <img src="https://i.imgur.com/FubZfbl.jpeg" alt="Memory photo 2" loading="lazy">
-      <img src="https://i.imgur.com/W2L5kNv.jpeg" alt="Memory photo 3" loading="lazy">
-      <img src="https://i.imgur.com/wqdtsq8.jpeg" alt="Memory photo 4" loading="lazy">
-      <img src="https://i.imgur.com/Mka01BR.jpeg" alt="Memory photo 5" loading="lazy">
-      <img src="https://i.imgur.com/xiarD0Y.png" alt="Memory photo 6" loading="lazy">
-    </div>
-
-    <canvas id="sparkles"></canvas>
-    <div class="hearts" id="hearts"></div>
-  </div>
-
-  <script>
-    // Message (unchanged)
-    const message = `🌸💖 To My Boujaan, My AYESHA 💖🌸
-
-... "To the girl who carries quiet storms and still shines." — AYESHA
+"To the girl who carries quiet storms and still shines." — Ayesha
 
 Pakhi,
 I know Pakhi tumi maybe eita peye khusi teh lafaitaso. Asol-e English e lekhte gele hoyto onek somoy fully moner True feelings gulo express korte parbo nah, abar Bangla lekhar moto dhorjo o nai karon ei kotha gulo amr boujaan keh dite jacchi, jeh moner kotha gulo lafay lafay astase.
@@ -315,7 +380,7 @@ Ar amar kache tumi amar sobche dami kisu — jeta sara amar life ochol.
 Bujso?
 
 So, eita shune, eita buje khusi hon —
-Je apnar priyo manus-er kache apni tar priyo manus.
+Je apnar priyo manus er kache apni tar priyo manus.
 
 Amar kache janen, apnake compliments deyar moto onek kisui ase, kintu dibo nh.
 Maje maje jano lage tomar compliment deyar por o feel kori jeh amar feelings gulo express korte pari nai —
@@ -338,9 +403,9 @@ So, ekhon toh nijer jonmo tah niye happy hon?
 Tumi amar life ke notun shopno, notun alo diye bhore diyecho.
 Thank you, my Boujaan.
 
-Ami chai tumi nijeke niye khushi hou.Amader niye khusi hou amader ek sathe thaka niye khusi hou
+Ami chai tumi nijeke niye khushi hou.
 
-I LOVE YOU, I LOVE YOU THE MOST. THANK YOU ✨
+I LOVE YOU MY DARLING,THANK YOU SO MUCH FOR EVEYTHNG ✨
 
 🌸💖 At the End 💖🌸
 
@@ -351,51 +416,116 @@ I LOVE YOU, I LOVE YOU THE MOST. THANK YOU ✨
 Let's start a beautiful future together —
 Ki bolen?
 
-Amar haat dhore agaben? 🫴🏻
-Amar Behula. 💖... 
-`;
+Amar haat dhore agaben?🫴🏻
+Amar Behula. 💖
+      </pre>
+    </div>
 
-    // Initialize with timeout fallback
+    <div class="memory-gallery">
+      <div class="memory-card">
+        <img src="https://i.imgur.com/7iR8K6p.png" alt="Our Sweet Moments" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/lMoReZR.png" alt="Adventures Together" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/FubZfbl.jpeg" alt="Laughter Memories" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/W2L5kNv.jpeg" alt="Special Moments" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/xiarD0Y.png" alt="Private Jokes" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/Mka01BR.jpeg" alt="Adorable Moments" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+      <div class="memory-card">
+        <img src="https://i.imgur.com/bMRojvW.jpeg" alt="Precious Smile" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'">
+      </div>
+    </div>
+  </div>
+
+  <div class="music-player">
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music"></button>
+    <div class="music-tooltip">Play Teri Meri (Our Song)</div>
+  </div>
+
+  <audio id="bgMusic" loop preload="none">
+    <source src="https://file.garden/aBmv9ZdbGjS8LzMc/Teri-Meri%20Reprise%20%20Bodyguard%20%20Music%20Re%20Enhanced%20%20With%20Stereo%20%26%20Base%20%20@FeelTheBeat.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Minimal Preloading
     window.onload = () => {
-      const loadingTimeout = setTimeout(() => {
-        try {
-          gsap.to('#loading', {
-            opacity: 0,
-            duration: 0.5,
-            onComplete: () => {
-              document.getElementById('loading').style.display = 'none';
-              document.querySelector('.container').style.display = 'block';
-              initAnimations();
-              typeMessage();
-            }
-          });
-        } catch (e) {
-          console.error('Initialization failed:', e);
-          document.getElementById('loading').textContent = 'Error loading page. Please refresh.';
-        }
-      }, 1000);
-
-      // Preload critical resources
-      const resources = [
-        'https://file.garden/aBmv9ZdbGjS8LzMc/Teri-Meri%20Reprise%20%20Bodyguard%20%20Music%20Re%20Enhanced%20%20With%20Stereo%20%26%20Base%20%20@FeelTheBeat.mp3',
-        'https://i.imgur.com/7iR8K6p.png'
+      console.log('Starting preload');
+      const criticalResources = [
+        { src: 'https://file.garden/aBmv9ZdbGjS8LzMc/Teri-Meri%20Reprise%20%20Bodyguard%20%20Music%20Re%20Enhanced%20%20With%20Stereo%20%26%20Base%20%20@FeelTheBeat.mp3', type: 'audio' }
       ];
-      resources.forEach(src => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = src;
-        link.as = src.endsWith('.mp3') ? 'audio' : 'image';
-        document.head.appendChild(link);
+      let loadedCount = 0;
+
+      criticalResources.forEach(resource => {
+        if (resource.type === 'audio') {
+          const audio = new Audio(resource.src);
+          audio.onloadeddata = () => {
+            loadedCount++;
+            console.log(`Loaded: ${resource.src}`);
+          };
+          audio.onerror = () => {
+            loadedCount++;
+            console.warn(`Failed to load: ${resource.src}`);
+          };
+          audio.load();
+        }
       });
+
+      // Force page load after 3 seconds
+      setTimeout(() => {
+        console.log('Timeout reached, initializing page');
+        initPage();
+      }, 3000);
     };
 
-    // GSAP Animations (simplified)
+    function initPage() {
+      try {
+        console.log('Showing page content');
+        document.getElementById('loading').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loading').style.display = 'none';
+          document.querySelector('.container').style.display = 'block';
+          console.log('Container displayed, checking celebration button');
+          if (document.querySelector('.celebration-btn')) {
+            console.log('Celebration button is present');
+          } else {
+            console.error('Celebration button missing');
+          }
+          initAnimations();
+          createFloatingHearts();
+          createSparkles();
+          initMusicPlayer();
+          typeMessage();
+        }, 500);
+      } catch (e) {
+        console.error('Init page error:', e);
+      }
+    }
+
+    // Animations
     function initAnimations() {
       try {
-        gsap.from('h1', { y: -30, opacity: 0, duration: 0.8, ease: 'power3.out' });
-        gsap.from('.cake', { scale: 0.9, opacity: 0, duration: 1, ease: 'elastic.out(1, 0.5)', delay: 0.3 });
-        gsap.from('button', { y: 15, opacity: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out', delay: 0.8 });
-        gsap.from('.collage img', { y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out', delay: 1 });
+        if (typeof gsap === 'undefined') {
+          console.warn('GSAP not loaded, using CSS animations');
+          document.querySelector('.title').style.opacity = '1';
+          document.querySelector('.cake').style.opacity = '1';
+          document.querySelector('.celebration-btn').style.opacity = '1';
+          document.querySelector('.message-container').style.opacity = '1';
+          return;
+        }
+        gsap.from('.title', { y: 50, opacity: 0, duration: 1 });
+        gsap.from('.cake', { scale: 0.5, opacity: 0, duration: 1 });
+        gsap.from('.celebration-btn', { y: 15, opacity: 0, duration: 0.6, delay: 0.8 });
+        gsap.from('.message-container', { y: 30, opacity: 0, duration: 1, delay: 0.5 });
       } catch (e) {
         console.error('Animation error:', e);
       }
@@ -403,159 +533,216 @@ Amar Behula. 💖...
 
     // Typing Animation
     let index = 0;
+    const message = document.getElementById('loveLetter').textContent;
     function typeMessage() {
       try {
         if (index < message.length) {
-          document.getElementById('typedText').textContent += message.charAt(index);
-          if (index === 0) gsap.to('.typing-text', { opacity: 1, duration: 0.4 });
+          document.getElementById('loveLetter').textContent = message.slice(0, index + 1);
+          if (index === 0) {
+            if (typeof gsap !== 'undefined') {
+              gsap.to('.love-letter', { opacity: 1, duration: 0.4 });
+            } else {
+              document.querySelector('.love-letter').style.opacity = '1';
+            }
+          }
           index++;
           setTimeout(typeMessage, 20);
-        } else {
-          gsap.to(window, { scrollTo: { y: document.body.scrollHeight, autoKill: false }, duration: 1.5, ease: 'power2.inOut' });
         }
       } catch (e) {
         console.error('Typing error:', e);
       }
     }
 
+    // Floating Hearts
+    function createFloatingHearts() {
+      try {
+        const container = document.querySelector('.floating-hearts');
+        const heartEmojis = ['💖', '🌸', '💕'];
+        for (let i = 0; i < 5; i++) {
+          const heart = document.createElement('div');
+          heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+          heart.style.position = 'absolute';
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.top = Math.random() * 100 + '%';
+          heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
+          heart.style.opacity = Math.random() * 0.5 + 0.3;
+          heart.style.animation = `float ${(Math.random() * 6 + 4)}s linear infinite`;
+          heart.style.animationDelay = `${Math.random() * 2}s`;
+          container.appendChild(heart);
+        }
+      } catch (e) {
+        console.error('Floating hearts error:', e);
+      }
+    }
+
+    // Sparkles
+    function createSparkles() {
+      try {
+        const canvas = document.getElementById('sparkles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+        for (let i = 0; i < 5; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: Math.random() * 0.5 + 0.1,
+            color: `hsl(${Math.random() * 360}, 100%, 80%)`
+          });
+        }
+        function animate() {
+          try {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let p of particles) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+              ctx.fillStyle = p.color;
+              ctx.fill();
+              p.y += p.speedY;
+              p.x += p.speedX;
+              if (p.y > canvas.height) p.y = 0;
+              if (p.x > canvas.width || p.x < 0) p.speedX *= -1;
+            }
+            requestAnimationFrame(animate);
+          } catch (e) {
+            console.error('Sparkles animation error:', e);
+          }
+        }
+        animate();
+      } catch (e) {
+        console.error('Sparkles error:', e);
+      }
+    }
+
+    // Heart Explosion
+    function createHeartExplosion() {
+      try {
+        const heart = document.createElement('div');
+        heart.innerHTML = '💖';
+        heart.style.position = 'fixed';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '60vh';
+        heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+        heart.style.animation = `heartExplode 0.5s ease-out forwards`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 500);
+      } catch (e) {
+        console.error('Heart explosion error:', e);
+      }
+    }
+
     // Celebration
     function startCelebration() {
       try {
-        gsap.to('#flame', { opacity: 0, duration: 0.4 });
-        createSparkles();
-        createHearts();
-        triggerConfetti();
+        console.log('Starting celebration');
+        const button = document.querySelector('.celebration-btn');
+        button.disabled = true;
+        button.textContent = 'Happy Birthday! 🎉';
+        button.focus();
+
+        if (typeof gsap !== 'undefined') {
+          gsap.to('#flame', { opacity: 0, duration: 0.5 });
+          gsap.to('.cake', { y: -20, scale: 1.05, repeat: 1, yoyo: true, duration: 0.5 });
+        } else {
+          document.getElementById('flame').style.opacity = '0';
+          document.querySelector('.cake').style.transform = 'translateY(-20px) scale(1.05)';
+        }
+
+        if (typeof confetti !== 'undefined') {
+          confetti({
+            particleCount: 30,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff69b4', '#ffd700', '#ff1493', '#fff0f5']
+          });
+        }
+
+        for (let i = 0; i < 5; i++) {
+          setTimeout(createHeartExplosion, i * 100);
+        }
+
+        if (!isMusicPlaying) toggleMusic();
       } catch (e) {
         console.error('Celebration error:', e);
       }
     }
 
-    // Sparkles (reduced particles)
-    function createSparkles() {
-      const canvas = document.getElementById('sparkles');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      let particles = [];
-
-      const particleCount = window.innerWidth < 600 ? 30 : 50; // Further reduced
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 1,
-          speedX: (Math.random() - 0.5) * 1.2,
-          speedY: Math.random() * 1.2 + 0.3,
-          color: `hsl(${Math.random() * 360}, 100%, 80%)`
-        });
-      }
-
-      function animate() {
-        try {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (let p of particles) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-            p.y += p.speedY;
-            p.x += p.speedX;
-            if (p.y > canvas.height) p.y = 0;
-            if (p.x > canvas.width || p.x < 0) p.speedX *= -1;
-          }
-          requestAnimationFrame(animate);
-        } catch (e) {
-          console.error('Sparkles animation error:', e);
-        }
-      }
-      animate();
-    }
-
-    // Hearts (reduced)
-    function createHearts() {
-      const heartsContainer = document.getElementById('hearts');
-      const heartCount = window.innerWidth < 600 ? 5 : 8;
-      for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = '💖';
-        heart.style.position = 'absolute';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.top = '-10vh';
-        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-        heart.style.animation = `fall ${Math.random() * 2.5 + 1.5}s linear forwards`;
-        heartsContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-      }
-    }
-
-    // Confetti (reduced)
-    function triggerConfetti() {
-      try {
-        confetti({
-          particleCount: window.innerWidth < 600 ? 50 : 100,
-          spread: 60,
-          origin: { y: 0.6 },
-          colors: ['#ff69b4', '#ffd700', '#ff1493', '#fff0f5']
-        });
-      } catch (e) {
-        console.error('Confetti error:', e);
-      }
-    }
-
-    // Music Control
-    const music = document.getElementById('bg-music');
+    // Music Player
+    const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
-    let isPlaying = false;
+    let isMusicPlaying = false;
+
+    function initMusicPlayer() {
+      try {
+        console.log('Initializing music player');
+        music.volume = 0.5;
+        document.querySelector('.music-tooltip').textContent = "Click to play Teri Meri";
+      } catch (e) {
+        console.error('Music player init error:', e);
+        document.querySelector('.music-tooltip').textContent = "Audio unavailable";
+      }
+    }
 
     function toggleMusic() {
       try {
-        if (isPlaying) {
-          gsap.to(music, { volume: 0, duration: 0.4, onComplete: () => music.pause() });
+        console.log('Toggling music');
+        if (isMusicPlaying) {
+          if (typeof gsap !== 'undefined') {
+            gsap.to(music, { volume: 0, duration: 0.4, onComplete: () => music.pause() });
+          } else {
+            music.volume = 0;
+            music.pause();
+          }
           musicBtn.classList.remove('playing');
+          document.querySelector('.music-tooltip').textContent = "Play Teri Meri (Our Song)";
         } else {
-          music.volume = 0;
-          music.play().catch((e) => {
-            console.warn('Audio playback failed:', e);
-            musicBtn.textContent = '🔇 Audio Unavailable';
+          music.play().then(() => {
+            console.log('Music playing');
+            if (typeof gsap !== 'undefined') {
+              gsap.to(music, { volume: 0.5, duration: 0.4 });
+            } else {
+              music.volume = 0.5;
+            }
+            musicBtn.classList.add('playing');
+            document.querySelector('.music-tooltip').textContent = "Pause Teri Meri";
+          }).catch(e => {
+            console.error('Audio playback failed:', e);
+            musicBtn.classList.remove('playing');
+            document.querySelector('.music-tooltip').textContent = "Try again to play Teri Meri";
           });
-          gsap.to(music, { volume: 1, duration: 0.4 });
-          musicBtn.classList.add('playing');
         }
-        isPlaying = !isPlaying;
+        isMusicPlaying = !isMusicPlaying;
       } catch (e) {
         console.error('Music toggle error:', e);
       }
     }
 
-    // Parallax (only for non-touch devices)
-    if (!('ontouchstart' in window)) {
-      window.addEventListener('mousemove', (e) => {
-        try {
-          const cake = document.querySelector('.cake');
-          const x = (e.clientX / window.innerWidth - 0.5) * 15;
-          const y = (e.clientY / window.innerHeight - 0.5) * 15;
-          gsap.to(cake, { rotationY: x, rotationX: -y, duration: 0.4, ease: 'power2.out' });
-        } catch (e) {
-          console.error('Parallax error:', e);
+    // Event Listeners
+    try {
+      musicBtn.addEventListener('click', toggleMusic);
+      document.querySelector('.celebration-btn').addEventListener('click', startCelebration);
+      document.querySelector('.celebration-btn').addEventListener('touchstart', startCelebration);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !document.querySelector('.celebration-btn').disabled) {
+          startCelebration();
         }
       });
+    } catch (e) {
+      console.error('Event listener error:', e);
     }
 
-    // Touch Support
-    document.querySelector('button[onclick="startCelebration()"]').addEventListener('touchstart', startCelebration);
-
-    // Keyboard Accessibility
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && document.activeElement.tagName !== 'BUTTON') {
-        startCelebration();
-      }
-    });
-
-    // Handle Resize
+    // Resize Handler
     window.addEventListener('resize', () => {
-      const canvas = document.getElementById('sparkles');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      try {
+        const canvas = document.getElementById('sparkles');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      } catch (e) {
+        console.error('Resize error:', e);
+      }
     });
   </script>
 </body>
